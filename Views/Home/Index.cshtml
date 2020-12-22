@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApplication3.Controllers.Note>
+
+@{
+    ViewData["Title"] = "Планировщик";
+}
+
+<div class="text-center" style="padding-top: 200">
+    <a asp-action="Create">Добавить заметку</a> 
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Содержимое задачи :
+                </th>
+                <th>Дата создания: </th>
+                <th>Крайний срок:</th>
+                <th>Текущая</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Reverse()) {
+            <tr>
+                <td>
+                    <label class="col-form-label">@item.Text</label>
+                </td>
+
+                <td>@Html.DisplayFor(m => item.Created)</td>
+                <td>@Html.DisplayFor(m => item.Deadline)</td>
+                <td>@Html.DisplayFor(m => item.IsCurrent)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
